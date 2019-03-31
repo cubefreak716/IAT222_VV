@@ -4,7 +4,7 @@ Serial myPort;
 String val; 
 float vol;  //blue
 float vol2; //white
-
+byte[] inBuffer = new byte[255];
 
 import processing.sound.*;
 import ddf.minim.*;
@@ -35,6 +35,7 @@ void setup() {
   //String portName = Serial.list()[0];
   //myPort = new Serial(this, portName, 9600); 
   //myPort.bufferUntil('\n');
+  myPort = new Serial(this, Serial.list()[0], 9600); 
 
 }
 
@@ -60,6 +61,38 @@ void draw() {
   //  }    
   //  println("vol2 = " +vol2); 
   //}
+  
+  if(myPort.available() > 0 ){
+    println("  "); 
+    
+    myPort.readBytesUntil('&', inBuffer); 
+    
+    if(inBuffer != null){
+       String s1 = new String(inBuffer); 
+       
+       String[] p = splitTokens(s1, "&"); 
+       if(p.length<2) return; 
+       
+       String[] mic1 = splitTokens(p[0], "a"); 
+       if(mic1. length != 3) return; 
+       
+       vol  = float(mic1[1]); 
+       
+       print("1st sensor:");
+       print(vol);
+       println(" "); 
+       
+       String[] mic2 = splitTokens(p[0],"b"); 
+       if(mic2.length != 3) return; 
+       vol2 = float(mic2[1]); 
+       
+       print("2nd sensor:"); 
+       print(vol2); 
+       println("  "); 
+    }
+        
+        
+  }
   
   /////Room Tone ////
   // if (vol<5){
@@ -92,7 +125,7 @@ void draw() {
   }
 
   ////input for left side//// 
-  if (keyPressed) {
+  if (keyPressed && vol>0) {
     //float vol = 100*analyzer.analyze();
     //if (vol>40) {
     //  vol = 40;
@@ -105,12 +138,12 @@ void draw() {
     o.xVel = random(2, 8);
     o.yVel = random(-2, 2);
     //with input
-    //o.w = vol;
-    //o.h = vol;
+    o.w = vol;
+    o.h = vol;
     //o.w = 5; 
     //o.h = 5; 
-    o.w = random(1, 20);
-    o.h = o.w; 
+    //o.w = random(1, 20);
+    //o.h = o.w; 
     
     //println("yes");
 
@@ -120,11 +153,11 @@ void draw() {
 
 
   ////input for right side////
-  if (keyPressed && keyCode == RIGHT) {
-    float vol2 = 100*analyzer.analyze();
-    if(vol2<2){
-       vol2 = 2;  
-    }
+  if (keyPressed && keyCode == RIGHT && vol2 >0 ) {
+    //float vol2 = 100*analyzer.analyze();
+    //if(vol2<2){
+    //   vol2 = 2;  
+    //}
     ObjectR r = new ObjectR();
     r.x = width;
     r.y = height/2;
