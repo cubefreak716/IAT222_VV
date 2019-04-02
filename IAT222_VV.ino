@@ -9,7 +9,7 @@ Louder sounds = brighter LED. Test with music to get a strobe
 
 
 // if the volume is contantlyl being output will show something different? 
-
+// 
 
 int micPin = A0;    // microphone sensor input
 int micPin2 = A4; 
