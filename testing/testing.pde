@@ -32,7 +32,7 @@ void setup() {
   
   
   ////arduino setup ////
-  //myPort = new Serial(this, Serial.list()[0], 9600); 
+  myPort = new Serial(this, Serial.list()[0], 9600); 
 
 }
 
@@ -59,35 +59,35 @@ void draw() {
   //  println("vol2 = " +vol2); 
   //}
   
-  //if(myPort.available() > 0 ){
-  //  println("  "); 
+  if(myPort.available() > 0 ){
+    println("  "); 
     
-  //  myPort.readBytesUntil('&', inBuffer); 
+    myPort.readBytesUntil('&', inBuffer); 
     
-  //  if(inBuffer != null){
-  //     String s1 = new String(inBuffer); 
+    if(inBuffer != null){
+       String s1 = new String(inBuffer); 
        
-  //     String[] p = splitTokens(s1, "&"); 
-  //     if(p.length<2) return; 
+       String[] p = splitTokens(s1, "&"); 
+       if(p.length<2) return; 
        
-  //     String[] mic1 = splitTokens(p[0], "a"); 
-  //     if(mic1. length != 3) return; 
+       String[] mic1 = splitTokens(p[0], "a"); 
+       if(mic1. length != 3) return; 
        
-  //     vol  = float(mic1[1]); 
+       vol  = float(mic1[1]); 
        
-  //     print("1st sensor:");
-  //     print(vol);
-  //     println(" "); 
+       print("1st sensor:");
+       print(vol);
+       println(" "); 
        
-  //     String[] mic2 = splitTokens(p[0],"b"); 
-  //     if(mic2.length != 3) return; 
-  //     vol2 = float(mic2[1]); 
+       String[] mic2 = splitTokens(p[0],"b"); 
+       if(mic2.length != 3) return; 
+       vol2 = float(mic2[1]); 
        
-  //     print("2nd sensor:"); 
-  //     print(vol2); 
-  //     println("  "); 
-  //  }       
-  //}//port available
+       print("2nd sensor:"); 
+       print(vol2); 
+       println("  "); 
+    }       
+  }//port available
   
   /////Room Tone ////
   // if (vol<5){
@@ -120,8 +120,8 @@ void draw() {
   }
 
   ////input for left side//// 
-  //if (keyPressed && vol>0) {
-  if (keyPressed) {
+  if (keyPressed && vol>0) {
+  //if (keyPressed) {
     /////using comp mic
     //float vol = 100*analyzer.analyze();
     //if (vol>40) {
@@ -135,13 +135,13 @@ void draw() {
     o.xVel = random(2, 8);
     o.yVel = random(-2, 2);
     //with input
-    //o.w = vol;
-    //o.h = vol;
+    o.w = vol;
+    o.h = vol;
     //without input
     //o.w = 5; 
     //o.h = 5; 
-    o.w = random(1, 20);
-    o.h = o.w; 
+    //o.w = random(1, 20);
+    //o.h = o.w; 
     
     //println("yes");
 
@@ -151,8 +151,8 @@ void draw() {
 
 
   ////input for right side////
-  //if (keyPressed && keyCode == RIGHT && vol2 >0 ) {
-    if (keyPressed && keyCode == RIGHT) {
+  if (keyPressed && keyCode == RIGHT && vol2 >0 ) {
+    //if (keyPressed && keyCode == RIGHT) {
     //using comp mic
     //float vol2 = 100*analyzer.analyze();
     //if(vol2<2){
@@ -164,11 +164,11 @@ void draw() {
     r.xVel = random(-8, -2);
     r.yVel = random(-2, 2);
     //with input
-    //r.w = vol2;
-    //r.h = vol2;
+    r.w = vol2;
+    r.h = vol2;
     //without input
-    r.w = 2;
-    r.h = 2;
+    //r.w = 2;
+    //r.h = 2;
 
     boomR.add(r);
   }
