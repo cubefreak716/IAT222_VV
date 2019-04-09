@@ -29,18 +29,18 @@ class ObjectR {
   
   void collision(Object o){
     
-    if(isHit == false){
+    //if(isHit == false){
       
-      if(dist(o.x, o.y, x, y)<o.w/2+w/2 && o.w >=100 && w>=100){ //loud
-         //collision from right
-         o.xVel = -o.xVel;
-         xVel = -xVel; 
-         o.yVel = -o.yVel;
-         yVel = - yVel; 
-         isHit = true;
-         o.isHit = true; 
-      }
-    }
+    //  if(dist(o.x, o.y, x, y)<o.w/2+w/2 && o.w >=100 && w>=100){ //loud
+    //     //collision from right
+    //     o.xVel = -o.xVel;
+    //     xVel = -xVel; 
+    //     o.yVel = -o.yVel;
+    //     yVel = - yVel; 
+    //     isHit = true;
+    //     o.isHit = true; 
+    //  }
+    //}
     
   }
   

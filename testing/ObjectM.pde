@@ -52,7 +52,7 @@ class ObjectM {
     //rect(x,y,w*8,h);
     w += 1;
     h += 1;
-    if (w>80){
+    if (w > 180){
      merge.remove(this);  
     }
     
