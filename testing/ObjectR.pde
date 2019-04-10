@@ -48,10 +48,10 @@ class ObjectR {
   void drawMe() {
     //fill(0);
     if(timer>0){
-       timer --;  
+     timer --;  
     }
-    if(timer ==0){
-       boomR.remove(this);  
+    if(timer == 0){
+      boomR.remove(this);  
     }
     
     pushStyle(); 
@@ -60,7 +60,8 @@ class ObjectR {
     ellipse(x,y,w,h);
     //rect(x,y,w*8,h);
     if(w>=0 && w<=5){       //whispers
-        if(x <= (width-500)){
+        
+       if(x <= (1400)){
           x += xVel;
           y += yVel;
           if(xVel<0){ 
@@ -84,12 +85,52 @@ class ObjectR {
     if(w>5 && w<=100){      //normal 
       x += xVel;
       y += yVel;
+     if(x <= (width/2)){
+          x += xVel;
+          y += yVel;
+          if(xVel<0){ 
+            xVel += 0.1;  
+          }          
+          if(yVel<0){
+            yVel += 0.01;  
+          }
+          if(yVel >= 0 && xVel >= 0){         //need to set a timer and after timer it removes itself
+             //r = 0; 
+             b = 255; 
+             if(timer == -1)
+             timer = 50; 
+          }
+        }
+        else{
+          x += xVel;
+          y += yVel;
+        }
     }
     if(w>100){             //loud
-      xVel = xVel*1.01; 
-      yVel = yVel*1.01;
+      //xVel = xVel*1.01; 
+      //yVel = yVel*1.01;
       x += xVel;
       y += yVel;
+     if(x <= (width/2)){
+          x += xVel;
+          y += yVel;
+          if(xVel<0){ 
+            xVel += 0.1;  
+          }          
+          if(yVel<0){
+            yVel += 0.01;  
+          }
+          if(yVel >= 0 && xVel >= 0){         //need to set a timer and after timer it removes itself
+             //r = 0; 
+             b = 255; 
+             if(timer == -1)
+             timer = 50; 
+          }
+        }
+        else{
+          x += xVel;
+          y += yVel;
+        }
       
     }
     
